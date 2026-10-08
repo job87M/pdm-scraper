@@ -7,7 +7,7 @@ export default function Topbar({ route }) {
   return (
     <header className="topbar">
       <div>
-        <p className="eyebrow">AMAZON PRODUCT TRACKER</p>
+        <p className="eyebrow">PRODUCT TRACKER</p>
         <h1 id="page-title">{titles[route]}</h1>
       </div>
       <a className="topbar-link" href="#scrape">
