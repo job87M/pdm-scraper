@@ -53,15 +53,13 @@ No environment variables are required.
 
 ## Usage
 
-1. Open **Settings** and enter your Amazon Associate ID (tracking tag). It is stored in this browser and applied to every product link.
-2. On Amazon, open a product listing / deal page.
-3. Right-click a product card → Inspect → copy the outer HTML of the element that has `data-testid="product-card"`.
-4. Paste it into the scraper (or save the page as HTML and upload the file).
-5. Review the extracted products, then **Export CSV**. Links in the CSV (and on the Products page) include `?tag=your-id`.
+1. On Amazon, open a product listing / deal page.
+2. Right-click a product card → Inspect → copy the outer HTML of the element that has `data-testid="product-card"`.
+3. Paste it into the scraper (or save the page as HTML and upload the file).
+4. Review the extracted products, then **Export CSV**.
 
 ## Notes
 
-- Product data is **not** persisted across page reloads or devices. Export the CSV before closing the tab if you need it.
-- The Associate ID **is** persisted in `localStorage` so you only set it once per browser.
+- Data is **not** persisted across page reloads or devices. Export the CSV before closing the tab if you need it.
 - Countdown timers ("Ends in …") are resolved relative to the capture time of the HTML (file last-modified or “now”).
 - Only Amazon product-card HTML is supported.

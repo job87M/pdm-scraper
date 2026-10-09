@@ -1,19 +1,14 @@
-import { applyAssociateTag } from '../lib/associateId.js';
 import { formatRemaining, msRemaining } from '../lib/countdown.js';
 import { formatPrice } from '../lib/format.js';
 
-export default function ProductCard({ product, removing, onRemove, now, associateId }) {
+export default function ProductCard({ product, removing, onRemove, now }) {
   const remaining = msRemaining(product.deal_ends_at, now);
-  const href = applyAssociateTag(product.source_url, associateId);
-
   return (
     <article className="product-card">
       {product.image_url && <img className="product-image" src={product.image_url} alt="" />}
       <div className="product-details">
         <h3>
-          <a href={href} target="_blank" rel="noreferrer">
-            {product.title}
-          </a>
+          <a href={product.source_url} target="_blank" rel="noreferrer">{product.title}</a>
         </h3>
         <p className="product-price">{formatPrice(product.price)}</p>
         {Number.isFinite(product.deal_percentage) && (
@@ -21,13 +16,7 @@ export default function ProductCard({ product, removing, onRemove, now, associat
         )}
         {remaining !== null && (
           <p className={`product-countdown${remaining <= 0 ? ' ended' : ''}`}>
-            {remaining <= 0 ? (
-              'Deal ended'
-            ) : (
-              <>
-                Ends in <time dateTime={product.deal_ends_at}>{formatRemaining(remaining)}</time>
-              </>
-            )}
+            {remaining <= 0 ? 'Deal ended' : <>Ends in <time dateTime={product.deal_ends_at}>{formatRemaining(remaining)}</time></>}
           </p>
         )}
         {product.description && <p>{product.description}</p>}

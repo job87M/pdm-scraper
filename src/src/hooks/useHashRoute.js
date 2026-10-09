@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const ROUTES = ['scrape', 'products', 'settings'];
+export const ROUTES = ['scrape', 'products'];
 
 function readRoute() {
   const hash = window.location.hash.replace(/^#/, '');

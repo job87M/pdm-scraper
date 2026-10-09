@@ -1,5 +1,3 @@
-import { applyAssociateTag } from './associateId.js';
-
 // Column order matches affiliate-products-template.csv.
 export const CSV_COLUMNS = [
   'name',
@@ -28,7 +26,6 @@ const formatPrice = (value) => (Number.isFinite(value) ? value.toFixed(2) : '');
 /**
  * Build the CSV text for the affiliate products import template.
  * `options` fills columns the tracker does not store: category, live, countries.
- * When `associateId` is set, every product URL gets `?tag=<id>` (or replaces an existing tag).
  */
 export const ENDS_AT_COLUMN = 'ends_at';
 
@@ -40,17 +37,11 @@ function formatEndsAt(value) {
 
 export function productsToCsv(
   products,
-  {
-    category = '',
-    live = true,
-    countries = '',
-    includeEndsAt = false,
-    associateId = '',
-  } = {},
+  { category = '', live = true, countries = '', includeEndsAt = false } = {},
 ) {
   const rows = products.map((product) => [
     csvCell(product.title, { text: true }),
-    csvCell(applyAssociateTag(product.source_url, associateId)),
+    csvCell(product.source_url),
     csvCell(product.description, { text: true }),
     csvCell(product.image_url),
     csvCell(category.trim(), { text: true }),

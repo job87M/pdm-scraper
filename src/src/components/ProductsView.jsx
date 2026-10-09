@@ -15,20 +15,12 @@ const sortOptions = [
 function Statistics({ statistics }) {
   return (
     <div className="product-statistics">
-      <div>
-        <span>Total products</span>
-        <strong>{statistics.total}</strong>
-      </div>
-      <div>
-        <span>Average price</span>
-        <strong>{formatPrice(statistics.averagePrice)}</strong>
-      </div>
+      <div><span>Total products</span><strong>{statistics.total}</strong></div>
+      <div><span>Average price</span><strong>{formatPrice(statistics.averagePrice)}</strong></div>
       <div>
         <span>Average savings</span>
         <strong>
-          {Number.isFinite(statistics.averageSavings)
-            ? `${statistics.averageSavings.toFixed(1)}%`
-            : '—'}
+          {Number.isFinite(statistics.averageSavings) ? `${statistics.averageSavings.toFixed(1)}%` : '—'}
         </strong>
       </div>
     </div>
@@ -49,23 +41,16 @@ export default function ProductsView({
   remove,
   setSearch,
   setSortBy,
-  associateId,
 }) {
   const now = useNow(products.some((product) => product.deal_ends_at));
   let list;
   if (loading) {
-    list = (
-      <div className="empty-state">
-        <p>Loading products…</p>
-      </div>
-    );
+    list = <div className="empty-state"><p>Loading saved products…</p></div>;
   } else if (error) {
     list = (
       <div className="empty-state">
         <p role="alert">{error}</p>
-        <button type="button" className="button" onClick={reload}>
-          Try again
-        </button>
+        <button type="button" className="button" onClick={reload}>Try again</button>
       </div>
     );
   } else if (visibleProducts.length) {
@@ -76,18 +61,13 @@ export default function ProductsView({
         removing={deleting.includes(product.id)}
         onRemove={remove}
         now={now}
-        associateId={associateId}
       />
     ));
   } else {
     list = (
       <div className="empty-state">
         <h3>{products.length ? 'No matching products' : 'No products yet'}</h3>
-        <p>
-          {products.length
-            ? 'Try changing your search.'
-            : 'Scrape a product card on the Scraper page to get started. Data is kept only in this browser session.'}
-        </p>
+        <p>{products.length ? 'Try changing your search.' : 'Scrape a product card on the Scraper page to get started. Data is kept only in this browser session.'}</p>
       </div>
     );
   }
@@ -97,20 +77,10 @@ export default function ProductsView({
       <div className="section-heading">
         <div>
           <h2 id="products-title">Products</h2>
-          <p>
-            {statistics.total} · {statistics.withPrice} with a price
-            {associateId ? (
-              <>
-                {' '}
-                · tag <code>{associateId}</code>
-              </>
-            ) : null}
-          </p>
+          <p>{statistics.total} · {statistics.withPrice} with a price</p>
         </div>
         <div className="product-controls">
-          <label className="visually-hidden" htmlFor="product-search">
-            Search products
-          </label>
+          <label className="visually-hidden" htmlFor="product-search">Search products</label>
           <input
             id="product-search"
             type="search"
@@ -119,9 +89,7 @@ export default function ProductsView({
             disabled={loading}
             onChange={(event) => setSearch(event.target.value)}
           />
-          <label className="visually-hidden" htmlFor="product-sort">
-            Sort products
-          </label>
+          <label className="visually-hidden" htmlFor="product-sort">Sort products</label>
           <select
             id="product-sort"
             value={sortBy}
@@ -129,19 +97,13 @@ export default function ProductsView({
             onChange={(event) => setSortBy(event.target.value)}
           >
             {sortOptions.map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
+              <option key={value} value={value}>{label}</option>
             ))}
           </select>
         </div>
       </div>
-      {products.length > 0 && <ExportPanel products={visibleProducts} associateId={associateId} />}
-      {deleteError && (
-        <p className="form-status error" role="alert">
-          {deleteError}
-        </p>
-      )}
+      {products.length > 0 && <ExportPanel products={visibleProducts} />}
+      {deleteError && <p className="form-status error" role="alert">{deleteError}</p>}
       {products.length > 0 && <Statistics statistics={statistics} />}
       <div className="product-list">{list}</div>
     </section>

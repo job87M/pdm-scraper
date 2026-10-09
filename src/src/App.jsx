@@ -1,36 +1,19 @@
 import { useEffect } from 'react';
 import ProductsView from './components/ProductsView.jsx';
 import ScrapeForm from './components/ScrapeForm.jsx';
-import Settings from './components/Settings.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Topbar from './components/Topbar.jsx';
-import { useAssociateId } from './hooks/useAssociateId.js';
 import { useHashRoute } from './hooks/useHashRoute.js';
 import { useProducts } from './hooks/useProducts.js';
-
-const TITLES = {
-  scrape: 'Amazon Product Tracker',
-  products: 'Products · Amazon Product Tracker',
-  settings: 'Settings · Amazon Product Tracker',
-};
 
 export default function App() {
   const route = useHashRoute();
   const products = useProducts();
-  const { associateId, setAssociateId } = useAssociateId();
 
   useEffect(() => {
-    document.title = TITLES[route] ?? 'Amazon Product Tracker';
+    document.title =
+      route === 'products' ? 'Products · Pricedrop Product Tracker' : 'Pricedrop Product Tracker';
   }, [route]);
-
-  let content;
-  if (route === 'products') {
-    content = <ProductsView {...products} associateId={associateId} />;
-  } else if (route === 'settings') {
-    content = <Settings associateId={associateId} onSave={setAssociateId} />;
-  } else {
-    content = <ScrapeForm onSaved={products.addProducts} />;
-  }
 
   return (
     <div className="app-shell">
@@ -38,7 +21,11 @@ export default function App() {
       <div className="app-column">
         <Topbar route={route} />
         <main id="app" className="app-content">
-          {content}
+          {route === 'products' ? (
+            <ProductsView {...products} />
+          ) : (
+            <ScrapeForm onSaved={products.addProducts} />
+          )}
         </main>
       </div>
     </div>

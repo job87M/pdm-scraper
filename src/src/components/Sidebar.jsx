@@ -1,7 +1,6 @@
 const links = [
   { route: 'scrape', label: 'Scraper', icon: '⌕' },
   { route: 'products', label: 'Products', icon: '▤' },
-  { route: 'settings', label: 'Settings', icon: '⚙' },
 ];
 
 export default function Sidebar({ route }) {

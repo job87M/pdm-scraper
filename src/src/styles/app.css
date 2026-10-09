@@ -9,14 +9,11 @@
 .panel-lede { margin: 0 0 18px; color: #667085; line-height: 1.5; }
 .panel code { padding: 1px 5px; border-radius: 5px; background: #eef1f5; font-size: 0.9em; }
 
-#scrape-form,
-#settings-form { display: grid; gap: 12px; }
-#scrape-form label,
-#settings-form label { font-weight: 600; font-size: 14px; }
+#scrape-form { display: grid; gap: 12px; }
+#scrape-form label { font-weight: 600; font-size: 14px; }
 
 textarea,
 input[type="search"],
-input[type="text"],
 select {
   width: 100%;
   padding: 10px 12px;
@@ -25,26 +22,9 @@ select {
   color: inherit;
   background: #fff;
   font: inherit;
-  box-sizing: border-box;
 }
 
 textarea { resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
-
-.field-hint {
-  margin: -4px 0 0;
-  color: #667085;
-  font-size: 13px;
-  line-height: 1.45;
-}
-.field-hint code { padding: 1px 5px; border-radius: 5px; background: #eef1f5; font-size: 0.9em; }
-
-.form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-}
-
 
 textarea:focus-visible,
 input:focus-visible,
